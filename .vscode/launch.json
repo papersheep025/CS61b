@@ -1,0 +1,63 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "BombMain",
+            "request": "launch",
+            "mainClass": "bomb.BombMain",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Arithmetic",
+            "request": "launch",
+            "mainClass": "Arithmetic",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "Dessert",
+            "request": "launch",
+            "mainClass": "Dessert",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "JavaExercises",
+            "request": "launch",
+            "mainClass": "JavaExercises",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "ListExercises",
+            "request": "launch",
+            "mainClass": "ListExercises",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "MapExercises",
+            "request": "launch",
+            "mainClass": "MapExercises",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        },
+        {
+            "type": "java",
+            "name": "Point",
+            "request": "launch",
+            "mainClass": "Point",
+            "projectName": "CS61b-sp24-main_da6fa2fb"
+        }
+    ]
+}
