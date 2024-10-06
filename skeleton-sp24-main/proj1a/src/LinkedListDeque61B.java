@@ -33,7 +33,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         Node newNode = new Node(sentinel, x, sentinel.next);
         sentinel.next.prev = newNode; // Let the first node's pointer point to newNode.
         sentinel.next = newNode; // Point sentinel's next to the newNode, so that newNode becomes the first node
-        size++;
+        size ++;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         Node newNode = new Node(sentinel.prev, x, sentinel);
         sentinel.prev.next = newNode; // Update the current last node's next pointer
         sentinel.prev = newNode; // Point sentinel's previous to the new node
-        size++;
+        size ++;
     }
 
     @Override
