@@ -28,8 +28,7 @@ public class RedBlackTree<T extends Comparable<T>> {
          * @param left
          * @param right
          */
-        RBTreeNode(boolean isBlack, T item, RBTreeNode<T> left,
-                   RBTreeNode<T> right) {
+        RBTreeNode(boolean isBlack, T item, RBTreeNode<T> left, RBTreeNode<T> right) {
             this.isBlack = isBlack;
             this.item = item;
             this.left = left;
@@ -50,7 +49,9 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @param node
      */
     void flipColors(RBTreeNode<T> node) {
-        // TODO: YOUR CODE HERE
+        node.isBlack = !node.isBlack;
+        node.left.isBlack = !node.left.isBlack;
+        node.right.isBlack = !node.right.isBlack;
     }
 
     /**
@@ -61,9 +62,30 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @return
      */
     RBTreeNode<T> rotateRight(RBTreeNode<T> node) {
-        // TODO: YOUR CODE HERE
-        return null;
+        if (node == null || node.left == null) return node;
+
+        // Rotate right.
+        RBTreeNode<T> newRoot = node.left; // node is b and new root is a(node.left).
+        node.left = newRoot.right; // b's left is new root's right.
+        newRoot.right = node; // new root's right is b.
+
+        boolean temp = newRoot.isBlack;
+        newRoot.isBlack = node.isBlack;
+        node.isBlack = temp;
+
+        return newRoot;
     }
+//    RBTreeNode<T> rotateRight(RBTreeNode<T> node) {
+//        // a is left child of b -> b is right child of a
+//        RBTreeNode<T> newRoot = node.left; // new root -> a
+//        RBTreeNode<T> preRoot = newRoot.right; // New root's right is the previous root.
+//        newRoot.right = node; // new root's right is b now.
+//        node.left = preRoot; // Maintain the structure of the tree.
+//
+//        flipColors(newRoot); // Flip the color of the new root.
+//
+//        return newRoot;
+//    }
 
     /**
      * Rotates the given node to the left. Returns the new root node of
@@ -72,9 +94,19 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @param node
      * @return
      */
+    // TODO: Fix rotateLeft
     RBTreeNode<T> rotateLeft(RBTreeNode<T> node) {
-        // TODO: YOUR CODE HERE
-        return null;
+        if (node == null || node.right == null) return node;
+
+        RBTreeNode<T> newRoot = node.right; // node is a and new root is b(a's right)
+        node.right = newRoot.left; // a's right is new root's left.
+        newRoot.left = node; // new root's left is a
+
+        boolean temp = newRoot.isBlack;
+        newRoot.isBlack = node.isBlack;
+        node.isBlack = temp;
+
+        return newRoot;
     }
 
     /**
@@ -105,17 +137,31 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @return
      */
     private RBTreeNode<T> insert(RBTreeNode<T> node, T item) {
-        // TODO: Insert (return) new red leaf node.
+        // Insert (return) new red leaf node.
+        if (node == null) return new RBTreeNode<>(false, item);
 
-        // TODO: Handle normal binary search tree insertion.
+        // Handle normal binary search tree insertion.
+        if (item.compareTo(node.item) > 0) { // If the item is greater, recurse to right.
+            node.right = insert(node.right, item);
+        } else if (item.compareTo(node.item) < 0) { // If the item is smaller, recurse to left.
+            node.left = insert(node.left, item);
+        }
 
-        // TODO: Rotate left operation
+        // Rotate left operation
+        // If left child is black and right child is red, rotate left.
+        if (!isRed(node.left) && isRed(node.right)) node = rotateLeft(node);
+        // If both node and its right is red, should also rotate left.
+        if (isRed(node) && isRed(node.right)) node = rotateLeft(node);
 
-        // TODO: Rotate right operation
+        // Rotate right operation
+        // If left child and its child are both red, rotate right.
+        if (isRed(node.left) && isRed(node.left.left)) node = rotateRight(node);
 
-        // TODO: Color flip
+        // Color flip
+        // If both left and right child are red, flip the color.
+        if (isRed(node.left) && isRed(node.right)) flipColors(node);
 
-        return null; //fix this return statement
+        return node;
     }
 
 }
